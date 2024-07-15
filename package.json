@@ -1,0 +1,17 @@
+{
+  "name": "Wordle",
+  "version": "1.0.0-alpha",
+  "description": "A rip-off of the NYC's famous Wordle game.",
+  "main": "server.js",
+  "scripts": {
+    "run": "node ./server.js"
+  },
+  "keywords": [
+    "wordle"
+  ],
+  "author": "Apache X692",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
