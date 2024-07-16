@@ -4,8 +4,8 @@
  */
 const keyboardRows = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-    ["ENTER", 'Z', 'X', 'C', 'V', 'B', 'N', 'M', "BACK"]
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', "BACK"],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M', "ENTER"]
 ];
 
 function renderKeyboard() {
@@ -37,15 +37,20 @@ function handleKeyboardClick(event) {
     if (elementClicked.id != 'k')
         return;
 
-    // TODO
+    if (elementClicked.textContent == "ENTER") {
+        handleRowSubmission();
+        return;
+    }
+
+    if (elementClicked.textContent == "BACK") {
+        handleBackButtonEvent();
+        return;
+    }
+
     if (globals.currentCursorPosition == 5)
         return;
 
-    document.getElementById(
-        "i-" + globals.currentRow + globals.currentCursorPosition
-    ).textContent = elementClicked.textContent;
-
-    globals.currentCursorPosition++;
+    addLetterToRow(elementClicked.textContent);
 }
 
 renderKeyboard();
