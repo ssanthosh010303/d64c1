@@ -2,6 +2,19 @@
  * Author: Apache X692 Attack Helicopter
  * Created on: 15/07/2024
  */
-setTimeout(() => {
-    document.body.classList.remove("d-none");
-}, 500);
+function setTheme() {
+    const isDarkThemePreferred = window.matchMedia(
+        "(prefers-color-scheme: dark)").matches;
+
+    document.documentElement.setAttribute("data-bs-theme",
+        isDarkThemePreferred ? "dark" : "light"
+    );
+    document.body.className = "bg-" + (
+        isDarkThemePreferred ? "black" : "light"
+    );
+}
+
+setTheme();
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
+    "change", setTheme
+);

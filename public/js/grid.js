@@ -22,6 +22,7 @@ function clearGrid() {
             else if (element.classList.contains("bg-warning"))
                 element.classList.remove("bg-warning");
 
+            element.classList.add("bg-body");
             element.textContent = '';
         }
     }
@@ -65,26 +66,38 @@ function handleRowSubmission() {
         return;
     }
 
-    showRowResults(predictedWord, actualWord);
+    if (showRowResults(predictedWord, actualWord))
+        alert(
+            "Bro, that word doesn't even exist in the English dictionary. 📖"
+        );
 
     globals.currentRow++;
     globals.currentCursorPosition = 0;
 }
 
 function showRowResults(predictedWord, actualWord) {
+    let counter = 0;
+
     for (let index = 0; index < globals.maxColsGrid; index++) {
         if (predictedWord[index] == actualWord[index]) {
             changeGridItemBackground("success", index);
         } else if (actualWord.includes(predictedWord[index])) {
             changeGridItemBackground("warning", index);
+        } else {
+            counter++;
         }
     }
+
+    return (counter == predictedWord.length);
 }
 
 function changeGridItemBackground(color, colIndex) {
-    document.getElementById("i-" + globals.currentRow + colIndex).classList.add(
-        "bg-" + color
+    const gridItem = document.getElementById(
+        "i-" + globals.currentRow + colIndex
     );
+
+    gridItem.classList.remove("bg-body");
+    gridItem.classList.add("bg-" + color);
 }
 
 function handleBackButtonEvent() {
@@ -108,7 +121,7 @@ function renderGrid() {
             let newGridItem = document.createElement("div");
 
             newGridItem.classList.add(
-                "border", "text-center", "rounded", "m-1", "p-2"
+                "border", "text-center", "bg-body", "rounded", "m-1", "p-2"
             );
             newGridItem.style.minWidth = "50px";
             newGridItem.style.minHeight = "50px";

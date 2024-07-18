@@ -41,6 +41,7 @@ function resetGlobals(defaultGlobals = _defaultGlobals) {
     let data = JSON.parse(JSON.stringify(defaultGlobals));
     data.word = _words[Math.floor(Math.random() * _words.length)];
 
+    console.log(data.word);
     return data;
 }
 
